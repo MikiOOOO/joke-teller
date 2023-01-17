@@ -6,11 +6,12 @@ const VoiceRSS={speech:function(e){this._validate(e),this._request(e)},_validate
 let joke='';
 let isAudioPlaying = false;
 
+
 // Passing Joke to VoiceRSS API
 function tellMe(joke)
 {   
     isAudioPlaying = true;
-    toggleButtons();
+    toggleButtons()
     VoiceRSS.speech({
         key: '70e67f76219141c387eee92c52325852',
         src: joke,
@@ -21,27 +22,27 @@ function tellMe(joke)
         f: '44khz_16bit_stereo',
         ssml: false
     });
+   
 }
 //toggle buttons
-function toggleButtons(){
-    
- if(isAudioPlaying){
+function toggleButtons()
+{
+    if(isAudioPlaying) {
         buttonGetJoke.disabled = true;
         buttonRepeatJoke.disabled = true;
- }else
- {
-      buttonGetJoke.disabled = false;
+    }else
+    {  
+        buttonGetJoke.disabled = false;
         buttonRepeatJoke.disabled = false;
- }
-    
+
+    }
 }
-//switching isPlayingAudio variable
+//switch isAudioVariable
 function endPlaying()
 {
     isAudioPlaying = false;
     toggleButtons();
 }
-
 
 // Get Jokes from Joke API
 async function getJokes() {
@@ -53,6 +54,7 @@ async function getJokes() {
         const data = await response.json();
         joke = data.joke;
         tellMe(joke);
+        
       
 
     }catch(error){
@@ -64,4 +66,6 @@ async function getJokes() {
 buttonGetJoke.addEventListener('click', getJokes);
 buttonRepeatJoke.addEventListener('click', function(){tellMe(joke)});
 audioElement.addEventListener('ended', endPlaying);
+
+
 
